@@ -1,0 +1,146 @@
+---
+title: "Incarceration Trends Data Analysis"
+writer: "Siqi Mao"
+Date: "02/23/2022"
+output: html_document
+---
+
+```{r , include=FALSE}
+source("~/Documents/a3-Siqi1234/source/analysis.R")
+library("knitr")
+```
+
+## Introduction
+This is a brief report regarding population in jail of different races in US. This report focuses on the relationship between race and jail population. the reason why I choose to analyze the relationship between races and jail population is from the analysis we are able to find out the potential reasons, like _historical factors_, _social factors_, and _political factors_, behind the connection. I focus more on the comparison between white people and other races because it is meaningful to find out if the marginalized groups are treated differently in jail incarceration. 
+
+## Data Source
+The data is collected from [Vera](https://trends.vera.org/). 
+
+```{r , echo=FALSE}
+data <- "https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv"
+incarceration <- read.csv(data, header = TRUE, stringsAsFactors = FALSE)
+View(incarceration)
+```
+
+Followings are variables I select to analyze:
+**_aapi_jail_pop_**: Asian American / Pacific Isander in jail population each county each year.
+**_native_jail_pop_**: Native American in jail population each county each year.
+**_black_jail_pop_**: Black people in jail population each county each year.
+**_latinx_jail_pop_**: Latinx in jail population each county each year.
+**_white_jail_pop_**: White people in jail population each county each year.
+**_aapi_pop_15to64_**: Asian American / Pacific Isander population aged from 15 to 64 each county each year.
+**_native_pop_15to64_**: population of native American aged from 15 to 64 each county each year.
+**_black_pop_15to64_**: population of black people aged from 15 to 64 each county each year.
+**_latinx_pop_15to64_**: population of Latinx aged from 15 to 64 each county each year.
+**_white_pop_15to64_**: population of white aged from 15 to 64 each county each year.
+**_total_pop_15to64_**: total population each county each year.
+**_year_**: Most years I select to analyze are from 1985-2018 because there is data missing of jail population before 1985.
+**_urbanicity_**: there are four categories: urban, rural, small/mid, suburban
+
+## Summary Information
+
+I clear up the dataset _incarceration_, and make **three** data frames based on _incarceration_. 
+
+* **Dataframe 1**
+
+```{r ,echo=FALSE, paged.print=TRUE}
+View(ave_prop_races_jail)
+```
+
+This data frame contains two types of information: average proportion jail population of five races each year in US, which is like "race_jail_pop / total_jail_pop"; and the average proportion of population of each race in total population. Because there are too many counties in the dataset, it is clearer to calculate the average proportion of jail population each race each year, from which we are able to see the trend of jail population of each race over time. 
+
+Here are **average proportion of jail population** of each race:
+
+```{r ,echo = FALSE}
+View(ave_prop_races_jail)
+```
+
+The reason why I also include the “ave_pro_race_pop” in my data frame is to find the difference between these two measures. We can combine the column of the average proportion of population of each race in total population with ‘ave_jail_race’ to better understand the average jail population of each race. It will be surprising to find if a race with a low proportion of total population has a high proportion of jail population. For example, in 2018, the average proportion of black people in total population is **0.09878677**, which is less than its average proportion of jail population **0.2291444**. The same story happens on the latinx, which has **0.09877995** in 'ave_pop_latinx_pop', but has **0.11902723** in 'ave_jail_latinx_. However, for the white people, it is quite differenT, its average proportion in total population is **0.7622024**, and its 'ave_jail_white' is **0.6556266**, which is more normal than black people and latinx. Many reasonS may contribute to this phenomenon, like social status, economical conditions, historical contexts...
+
+* **Dateframe 2**
+
+My second dataframe focuses more on the highest number of jail population of different races in 2018.
+```{r , echo = FALSE}
+View(highest_black_jail)
+View(highest_white_jail)
+View(highest_latinx_jail)
+View(highest_native_jail)
+View(highest_aapi_jail)
+```
+The highest jail population of black people in 2018 is **5024**, which happens in _Los Angeles County, CA_. 
+
+The highest jail population of white people in 2018 is **4577**, which happens in _Maricopa County, AZ_.
+
+The highest jail population of latinx people in 2018 is **8728**, which happens in _Los Angeles County, CA_.
+
+The highest jail population of native American people in 2018 is **379**, which happens in _Los Angeles County, CA_.
+
+The highest jail population of aapi people in 2018 is **286.4**, which happens in _San Bernardino County, CA_.
+
+* **Dateframe 3**
+
+My third dataframe is used to record the total number of jail population of each four race in **each state** in 2018.
+```{r , echo = FALSE}
+View(state_white_jail)
+View(state_latinx_jail)
+View(state_black_jail)
+```
+
+From the group of dataframe 3, we can tell: 
+
+The highest jail total population of black people in 2018 is **21921.25**, which happens in _GA_.
+
+The highest jail total population of white people in 2018 is **26048.31**, which happens in _FL_.
+
+The highest jail total population of latinx people in 2018 is **33763.88**, which happens in _CA_.
+
+It is quite surprsing for me to find the total jail population of latinx people is greater than that of white people and black people.
+
+## Chart 1
+
+Here is my first chart: **_Jail Population of Black People in Top 5 5 tates (1985-2018)_**
+
+
+```{r ,message=FALSE, warning=FALSE, echo=FALSE}
+c
+```
+
+
+In my first chart, I find the relationship between jail population and top 5 states from 1985 to 2018. It is thoughtful and meaningful to see the trend of each state because different policy and social background will result different jail population of races. The chart can provide a tool for analyzing the reason behind. I choose **CA, FL, GA, LA, and TX** as my top 5 states is because after analyzing the data over year, I find these 5 states always at the top of the greatest population. From the chart, we can tell TX and CA peak at around 1993, and GA, LA, FL peak at around 2009. Besides, after the peak, all lines go downward overall, which means the jail population of five races is all overall decreasing over time.
+
+
+## Chart 2
+
+Here is my second chart: **_Jail Population of White and Black People in Rural and Urban_**
+
+
+```{r , echo=FALSE}
+two
+```   
+From chart two, we can tell:
+  * Jail population in urban presents the trend of first increasing, then decreasing over year. 
+  * It is interesting to find that there are more jail population of black pelple in urban than that of white people over year. 
+  * After 2005, the jail population of white people in rural increases rapidly, but keeps the same for black people. Therefore, it is meaningful to find out what happened in 2005 and what incident or policy results the difference between white and black people.
+  
+
+## Map
+Here is my map looks like:
+
+
+```{r , echo=FALSE}
+map
+```   
+
+
+
+
+
+In my map, I present the connection between black jail population and the state in US. The closer the color on the map is to red, the greater the black jail population is in the state. From the choropleth map, we can tell that TX, FL, GA, and LA have the greatest black jail population. The second states are CA and some states in east. It is meaningful to see which states have greater black jail population and the most important is why are these states. Overall, southern states have more black jail population than in the north. Is there inequality in the justice system? Or has it something to do with economic development and education level?
+
+   
+   
+   
+   
+   
+
+

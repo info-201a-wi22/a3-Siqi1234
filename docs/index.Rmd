@@ -1,7 +1,7 @@
 ---
 title: "Incarceration Trends Data Analysis"
-writer: "Siqi Mao"
-Date: "02/23/2022"
+author: "Siqi Mao"
+date: "02/23/2022"
 output: html_document
 ---
 
@@ -10,16 +10,20 @@ source("~/Documents/a3-Siqi1234/source/analysis.R")
 library("knitr")
 ```
 
+
+
 ## Introduction
 This is a brief report regarding population in jail of different races in US. This report focuses on the relationship between race and jail population. the reason why I choose to analyze the relationship between races and jail population is from the analysis we are able to find out the potential reasons, like _historical factors_, _social factors_, and _political factors_, behind the connection. I focus more on the comparison between white people and other races because it is meaningful to find out if the marginalized groups are treated differently in jail incarceration. 
 
+
 ## Data Source
+
 The data is collected from [Vera](https://trends.vera.org/). 
 
 ```{r , echo=FALSE}
 data <- "https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv"
 incarceration <- read.csv(data, header = TRUE, stringsAsFactors = FALSE)
-View(incarceration)
+
 ```
 
 Followings are variables I select to analyze:
@@ -52,7 +56,7 @@ This data frame contains two types of information: average proportion jail popul
 Here are **average proportion of jail population** of each race:
 
 ```{r ,echo = FALSE}
-View(ave_prop_races_jail)
+kable(ave_prop_races_jail)
 ```
 
 The reason why I also include the “ave_pro_race_pop” in my data frame is to find the difference between these two measures. We can combine the column of the average proportion of population of each race in total population with ‘ave_jail_race’ to better understand the average jail population of each race. It will be surprising to find if a race with a low proportion of total population has a high proportion of jail population. For example, in 2018, the average proportion of black people in total population is **0.09878677**, which is less than its average proportion of jail population **0.2291444**. The same story happens on the latinx, which has **0.09877995** in 'ave_pop_latinx_pop', but has **0.11902723** in 'ave_jail_latinx_. However, for the white people, it is quite differenT, its average proportion in total population is **0.7622024**, and its 'ave_jail_white' is **0.6556266**, which is more normal than black people and latinx. Many reasonS may contribute to this phenomenon, like social status, economical conditions, historical contexts...
@@ -60,13 +64,15 @@ The reason why I also include the “ave_pro_race_pop” in my data frame is to 
 * **Dateframe 2**
 
 My second dataframe focuses more on the highest number of jail population of different races in 2018.
+
 ```{r , echo = FALSE}
-View(highest_black_jail)
-View(highest_white_jail)
-View(highest_latinx_jail)
-View(highest_native_jail)
-View(highest_aapi_jail)
+kable(highest_black_jail)
+kable(highest_white_jail)
+kable(highest_latinx_jail)
+kable(highest_native_jail)
+kable(highest_aapi_jail)
 ```
+
 The highest jail population of black people in 2018 is **5024**, which happens in _Los Angeles County, CA_. 
 
 The highest jail population of white people in 2018 is **4577**, which happens in _Maricopa County, AZ_.
@@ -81,9 +87,9 @@ The highest jail population of aapi people in 2018 is **286.4**, which happens i
 
 My third dataframe is used to record the total number of jail population of each four race in **each state** in 2018.
 ```{r , echo = FALSE}
-View(state_white_jail)
-View(state_latinx_jail)
-View(state_black_jail)
+kable(state_white_jail)
+kable(state_latinx_jail)
+kable(state_black_jail)
 ```
 
 From the group of dataframe 3, we can tell: 
@@ -117,6 +123,11 @@ Here is my second chart: **_Jail Population of White and Black People in Rural a
 ```{r , echo=FALSE}
 two
 ```   
+
+
+
+
+
 From chart two, we can tell:
   * Jail population in urban presents the trend of first increasing, then decreasing over year. 
   * It is interesting to find that there are more jail population of black pelple in urban than that of white people over year. 
@@ -124,7 +135,8 @@ From chart two, we can tell:
   
 
 ## Map
-Here is my map looks like:
+
+_Here is my map:_
 
 
 ```{r , echo=FALSE}

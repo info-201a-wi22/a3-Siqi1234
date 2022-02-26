@@ -2,7 +2,7 @@ library("tidyverse")
 library("stringr")
 library("ggplot2")
 library("usmap")
-library(plotly)
+library("plotly")
 
 
 data <- "https://raw.githubusercontent.com/vera-institute/incarceration-trends/master/incarceration_trends.csv"
@@ -28,6 +28,7 @@ incarceration <- mutate(
 )
 
 ave_prop_races_jail <- incarceration %>%
+  filter(year >= 1990) %>%
   group_by(year) %>%
   summarise(ave_jail_white = mean(prop_jail_white, na.rm = TRUE), 
             ave_prop_white_pop = mean(prop_white_pop, na.rm = TRUE),
@@ -38,10 +39,14 @@ ave_prop_races_jail <- incarceration %>%
             ave_jail_latinx = mean(prop_jail_latinx, na.rm = TRUE), 
             ave_prop_latinx_pop = mean(prop_latinx_pop, na.rm = TRUE),
             ave_jail_native = mean(prop_jail_native, na.rm = TRUE), 
-            ave_prop_native_pop = mean(prop_native_pop, na.rm = TRUE))
+            ave_prop_native_pop = mean(prop_native_pop, na.rm = TRUE)) %>%
+  select(year, ave_jail_white, ave_prop_white_pop, ave_jail_aapi,
+       ave_prop_aapi_pop, ave_jail_black, ave_prop_black_pop, 
+       ave_jail_latinx, ave_prop_latinx_pop, ave_jail_native, 
+       ave_prop_native_pop)
             
 
-
+View(ave_prop_races_jail)
 
 
 
